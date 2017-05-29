@@ -9,13 +9,18 @@ const routerTask = require('./routes/task')
 const apiKey = require('./routes/middelwares/key')
 const routerBody = require('./routes/middelwares/body')
 
-const dbUrl = 'mongodb://localhost:27017/test'
-const PORT = 3000
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+const DB_URI = process.env.DB_URI
+const PORT = process.env.PORT
 
 const app = express()
 
 mongoose.Promise = Promise
-mongoose.connect(dbUrl)
+mongoose.connect(DB_URI)
 
 
 app.use(express.static( path.join(__dirname, '../client') ))
