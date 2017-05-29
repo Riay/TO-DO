@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .container
+    .wrapper
+      form.form-insert(action='/tasks', method='POST', name='task_Form')
+        h3.form-signin-heading Pendientes para hoy
+        hr.colorgraph
+        br
+        input.form-control(type='text', name='name', placeholder='Your Tasks', autofocus)
+        button.btn-danger.btn-lg.btn-primary.btn-block.btn-add Add
+        a.navbar-brand(href='/tasks/complete') Completed Tasks
+
+      ul#sortable.list-unstyled.list-group.list-tasks
+        each task in tasks
+           li.list-group-item
+             span.name #{task.name}&nbsp;
+              p.date #{new Date(task.modificatedTask)}
+             form.edit-form(action=`/task/${task.id}`)
+               input.hidden(name='edited-name', value=task.name)
+             button.btn.btn-primary.edit.edits(href=`/task/${task.id}`)
+               i.glyphicon.glyphicon-edit
+             button.btn.btn-success.ok(href=`/task/${task.id}`)
+               i.glyphicon.glyphicon-ok
+             button.btn.btn-danger.remove(href=`/task/${task.id}`)
+               i.glyphicon.glyphicon-remove
+        
+
+
+  

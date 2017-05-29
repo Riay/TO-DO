@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+ .container
+    .wrapper
+      form.form-insert(action='/tasks', method='POST', name='task_Form')
+        h3.form-signin-heading Task Completed
+        hr.colorgraph
+        br
+        each task in tasks
+           li.list-group-item
+             span.name #{task.name}&nbsp;
+        
